@@ -1,0 +1,14 @@
+{
+  "name": "storj-filesync",
+  "version": "1.0.0",
+  "description": "syncs files to storj network",
+  "main": "index.js",
+  "bin": {
+    "storj-filesync": "./index.js"
+  },
+  "author": "Cameron Ayer",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.13.0"
+  }
+}
