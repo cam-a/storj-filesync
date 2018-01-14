@@ -9,6 +9,7 @@
   "author": "Cameron Ayer",
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.13.0"
+    "commander": "^2.13.0",
+    "storj": "github:storj/node-libstorj"
   }
 }
