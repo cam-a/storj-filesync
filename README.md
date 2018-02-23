@@ -1,6 +1,6 @@
 # storj-filesync
 
-Sync a local directory to a Storj bucket of the same name
+Sync a local directory to a storj bucket of the same name
 
 If this bucket does not exist, it will be created
 
