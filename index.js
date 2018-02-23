@@ -5,7 +5,7 @@ const { Environment } = require('storj');
 const fs = require('fs');
 const path = require('path');
 
-const defaultEncryptKey = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon';
+const defaultEncryptKey = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
 var storj;
 
 program.option('-u, --username <username>', 'The user to authenticate as')

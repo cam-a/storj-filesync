@@ -6,7 +6,7 @@
   "bin": {
     "storj-filesync": "./index.js"
   },
-  "author": "Cameron Ayer",
+  "author": ["Cameron Ayer", "Alex Leitner"],
   "license": "MIT",
   "dependencies": {
     "commander": "^2.13.0",
