@@ -3,6 +3,7 @@
 const program = require('commander');
 const { Environment } = require('storj');
 const fs = require('fs');
+const path = require('path');
 
 const defaultEncryptKey = 'water prosper person property hill another unhappy lava earth mail assault shell effort need loan write weather giraffe century destroy park tower negative armed';
 var storj;
@@ -13,22 +14,20 @@ program.option('-e, --encrypt <encryptionKey>', 'Sets encryption key');
 
 /*************************************************************/
 
-function getBucketId(dir, mnemonic, callback) {
-  var bucketId;
-
-  storj.getBuckets(function(err, result) {
+function getBucketId(dir, callback) {
+  storj.getBucketId(dir, function(err, result) {
     if (err) {
-      return callback(err);
-    }
-    else {
-      for (var i = 0; i < result.length; i++) {
-        if (result[i].name === dir) {
-          return callback(null, result[i].id);
+      console.log(err);
+      return storj.createBucket(dir, function(err, result) {
+        if (err) {
+          return callback(err);
         }
-      }
-      return callback(new Error('Bucket doesn\'t exist'));
-      //create bucket with name === dir
+        console.log('Bucket created: ', result.name);
+        return callback(null, result.id);
+      });
     }
+    console.log('Bucket found: ', result.name);
+    return callback(null, result.id);
   });
 }
 
@@ -36,7 +35,7 @@ function getBucketId(dir, mnemonic, callback) {
 
 function sync_dir(dir) {
   var encryptionKey = (program.encryptionKey ? program.encryptionKey : defaultEncryptKey);
-  console.log('syncing directory:' + dir);
+  console.log('syncing directory: ' + dir);
   storj = new Environment({
     bridgeUrl: 'https://api.storj.io',
     bridgeUser: program.username,
@@ -44,7 +43,7 @@ function sync_dir(dir) {
     encryptionKey: encryptionKey,
     logLevel: 0
   });
-  getBucketId(dir, encryptionKey, function(err, bucketId) {
+  getBucketId(dir, function(err, bucketId) {
     if (err) {
       return console.error(err.message);
     }
@@ -53,7 +52,7 @@ function sync_dir(dir) {
         return console.error(err);
       }
       files.forEach(function(file) {
-        storj.storeFile(bucketId, (dir + '/' + file), {
+        storj.storeFile(bucketId, (dir + path.sep + file), {
           filename: file,
           progressCallback: function(progress, downloadedBytes, totalBytes) {
             console.log('progress:', progress);
