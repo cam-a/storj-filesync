@@ -1,4 +1,4 @@
-const program = require('commander')
+const program = require('commander');
 const { Environment } = require('storj');
 const fs = require('fs');
 const path = require('path');
