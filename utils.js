@@ -67,6 +67,5 @@ var sync_dir = function(dir) {
 /********************************/
 
 module.exports = {
-  sync_dir,
-  getBucketId
+  sync_dir
 };
